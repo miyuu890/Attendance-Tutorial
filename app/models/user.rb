@@ -44,4 +44,12 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest,nil)
   end  
+  
+  def self.search(search)
+   if search
+     where(['content LILE ?', "%#{search}%"])
+   else
+     all
+   end  
+  end 
 end
