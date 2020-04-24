@@ -1,5 +1,10 @@
 <% provide(:title, 'All Users') %>
+<% if params[:search] %>
+<h1>検索結果</h1>
+<% else %>
 <h1>ユーザー一覧</h1>
+<% end %>
+
 <div class="pull-right">
 <b>ユーザー名検索</b>
 <%= form_with url:users_path, method: :get, local: true do |f| %>
