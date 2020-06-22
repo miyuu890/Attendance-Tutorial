@@ -7,11 +7,7 @@ class UsersController < ApplicationController
   before_action :set_one_month, only: :show
 
   def index
-    @users = if params[:search]
-               User.paginate(page: params[:page]).where('name LIKE ?', "%#{params[:search]}%")
-             else
-               User.paginate(page: params[:page])
-             end   
+    @users = User.all  
                
                
   end
@@ -71,9 +67,9 @@ class UsersController < ApplicationController
   end
 
   private
-
+    
     def user_params
-      params.require(:user).permit(:name, :email, :department, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :department, :password, :password_confirmation)
     end
     
     def basic_info_params
