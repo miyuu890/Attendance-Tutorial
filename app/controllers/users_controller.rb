@@ -7,7 +7,8 @@ class UsersController < ApplicationController
   before_action :set_one_month, only: :show
 
   def index
-    @users = User.all  
+    @users = User.all 
+    
                
                
   end
@@ -74,7 +75,7 @@ class UsersController < ApplicationController
 
     
     def basic_info_params
-      params.require(:user).permit(:department, :basic_time,:work_time)
+      params.require(:user).permit(:department, :basic_time, :name, :email, :password, :emploee_number, :uid, :work_end_time, :work_start_time)
     end  
     
     def admin_or_correct_user
