@@ -1,9 +1,9 @@
 <% provide(:title, 'All Users') %>
 <h1>ユーザー一覧</h1>
 
-<%= form_tag "#", multipart: true do %>
+<%= form_tag import_users_path, multipart: true do %>
   <%= file_field_tag :file %>
-  <%=  link_to "CSVをインポート", "#", class: "btn btn-primary" %>
+  <%=  submit_tag "CSVをインポート", class: "btn btn-primary" %>
 <% end %>
 
   

@@ -13,10 +13,18 @@ class UsersController < ApplicationController
                
   end
   
+  def import
+    # fileはtmpに自動で一時保存される
+     User.import(params[:file])
+     flash[:success] = "ユーザー情報をインポートしました。"
+     redirect_to users_url
+  end   
+
+  
   
   
   def show
-   @worked_sum = @attendances.where.not(started_at: nil).count
+    @worked_sum = @attendances.where.not(started_at: nil).count
   end
 
   def new
