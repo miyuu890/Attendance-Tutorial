@@ -1,16 +1,22 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
-  before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info,:index]
+  before_action :correct_user, only: [:edit,:update]
+  before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info,:index,:update]
   before_action :admin_or_correct_user, only: :show
   before_action :set_one_month, only: :show
 
   def index
-    @users = User.all 
-    
-               
-               
+   @users = User.all 
+  # if params[:name].present?
+  #     @users = @users.get_by_name params[:name]
+  # end
+  #   if params[:id].present?
+  #     @user = User.find_by(id: @users.id)
+  #   else
+  #     @user = User.new
+  #   end
+
   end
   
   def import
@@ -50,7 +56,7 @@ class UsersController < ApplicationController
       flash[:success] = "ユーザー情報を更新しました。"
       redirect_to @user
     else
-      render :edit      
+      render :index     
     end
   end
 
@@ -78,7 +84,7 @@ class UsersController < ApplicationController
   private
     
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:department, :basic_time, :name, :email, :password, :emploee_number, :uid, :work_end_time, :work_start_time)
     end
 
     
