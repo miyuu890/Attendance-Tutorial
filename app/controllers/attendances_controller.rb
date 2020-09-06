@@ -9,7 +9,7 @@ class AttendancesController < ApplicationController
   def update
     @user = User.find(params[:user_id])
     @attendance = Attendance.find(params[:id])
-    # 出勤時間が未登録であることを判定します。
+    # 出勤時間が未登録であることを判定
     if @attendance.started_at.nil?
       if @attendance.update_attributes(started_at: Time.current.change(sec: 0))
         flash[:info] = "おはようございます！"
@@ -42,17 +42,31 @@ class AttendancesController < ApplicationController
     flash[:danger] = "無効な入力データがあった為、更新をキャンセルしました。"
     redirect_to attendances_edit_one_month_user_url(date: params[:date])
   end
+  
+   
+  def edit_overwork_request
+     @attendance = Attendance.find(params[:id])
+     @user = User.find(@attendance.user_id)
+  end  
+    
+  
+  def update_overwork_request
+    @attendance = @user.attendances.find_by(worked_on: @day)
+    @user.update_attributes(overwork_params)
+    flash[:success]= "残業を申請しました"
+    redirect_to @user
+  end  
 
   private
 
-    # 1ヶ月分の勤怠情報を扱います。
+    # 1ヶ月分の勤怠情報
     def attendances_params
       params.require(:user).permit(attendances: [:started_at, :finished_at, :note])[:attendances]
     end
 
     # beforeフィルター
 
-    # 管理権限者、または現在ログインしているユーザーを許可します。
+    # 管理権限者、または現在ログインしているユーザーを許可
     def admin_or_correct_user
       @user = User.find(params[:user_id]) if @user.blank?
       unless current_user?(@user) || current_user.admin?
@@ -60,4 +74,7 @@ class AttendancesController < ApplicationController
         redirect_to(root_url)
       end  
     end
+    
+    def overwork_params
+    end  
 end
