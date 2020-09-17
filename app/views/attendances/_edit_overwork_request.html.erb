@@ -9,7 +9,7 @@
     <div class="modal-body">
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
-          <%= form_with(model: @user, url: "#", local: true, method: :patch) do |f| %>
+          <%= form_with(model: @user, url:attendances_update_overwork_request_user_path(@attendance), local: true, method: :patch) do |f| %>
              <table class="table table-bordered table-condensed table-striped user-table">
                  <thead>
                    <th>日付</th>
