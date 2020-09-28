@@ -47,6 +47,9 @@ class AttendancesController < ApplicationController
   def edit_overwork_request
      @attendance = Attendance.find(params[:id])
      @user = User.find(@attendance.user_id)
+     @day = Date.parse(params[:day])
+     
+
   end  
     
   
@@ -80,6 +83,6 @@ class AttendancesController < ApplicationController
     end
     
     def overwork_params
-      params.require(:user).permit(attendances: [:scheduled_end_time, :next_day, :business_process, :confirmation])[:attendances]
+      params.require(:user).permit(attendances: [:scheduled_end_time, :business_process])[:attendances]
     end  
 end

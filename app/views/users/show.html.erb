@@ -65,7 +65,7 @@
     <tbody>
       <% @attendances.each do |day| %>
         <tr>
-          <td><%= link_to "残業申請",attendances_edit_overwork_request_user_path(@user,day),remote: true,class: "btn btn-primary" %></td>
+          <td><%= link_to "残業申請",attendances_edit_overwork_request_user_path(@user,params:{ day: day.worked_on}),remote: true,class: "btn btn-primary" %></td>
           <td><%= l(day.worked_on, format: :short) %></td>
           <td>
             <% if day.worked_on.wday == 6 %>
@@ -93,12 +93,13 @@
               <% @total_working_times = @total_working_times.to_f + str_times.to_f %>
             <% end %>
           </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <!--<td>備考 </td> -->
+          <!--<td>終了時間　時</td>-->
+          <!--<td>終了時間分</td>-->
+          <!--<td>時間外時間/td>-->
+          <!--<td></td>-->
+          <!--<td>指示者</td>-->
+          
           
           </td>
         </tr>

@@ -80,6 +80,10 @@ class UsersController < ApplicationController
     end
     redirect_to users_url
   end
+  
+  def atwork_members
+  
+  end  
 
   private
     

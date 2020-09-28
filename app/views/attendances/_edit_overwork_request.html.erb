@@ -23,10 +23,16 @@
                  <tbody>
                   <%= f.fields_for :attendances do |attendance| %>
                    <tr>
-                     <td><%= l(@attendance.worked_on, format: :short) %></td>
-                     <td><%= $days_of_the_week[@attendance.worked_on.wday] %></td>
+                     <td><%= l(@day, format: :short) %></td>
+                     <td><%= $days_of_the_week[@day.wday] %></td>
                      <td><%= attendance.time_field :scheduled_end_time, class: "form-control" %></td>
-                     <td><%= attendance.check_box :next_day, {}, "true","false"%></td>
+                     <td><%= attendance.check_box :next_day, {}, "true", "false" %></td>
+                   　 <td>
+                       <% if day.started_at.present? && day.finished_at.present? %>
+                         <%= working_times(day) %>
+                       <% end %>
+                     </td>
+                　   
                      <td><%= attendance.text_field :business_process, class: "form-control" %></td>
                      <td><%= attendance.select :confirmation, [["なし","なし"],["申請中","申請中"],["承認","承認"],["否認","否認"]], class: "form-control" %></td>
                    </tr>
