@@ -68,5 +68,4 @@ class User < ApplicationRecord
   def self.updatable_attributes
     [ "name", "email","department","emploee_number","uid","password","basic_time","work_start_time","work_end_time"]
   end
-
 end

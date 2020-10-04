@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'bases/new'
+
   root 'static_pages#top'
   get '/signup', to: 'users#new'
 
@@ -17,6 +19,10 @@ Rails.application.routes.draw do
       get 'attendances/edit_overwork_request'
       patch 'attendances/update_overwork_request'
     end
+    
+    collection do
+      get 'atwork_members'
+    end  
     
     collection { post :import }
 
