@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  get 'bases/new'
-
+  
+  
+  root 'bases#index'
+  
+  
+  
   root 'static_pages#top'
   get '/signup', to: 'users#new'
 
@@ -27,5 +31,18 @@ Rails.application.routes.draw do
     collection { post :import }
 
     resources :attendances, only: :update
+
   end
+  
+  
+  root 'home#top'
+ 
+  get 'bases/new', to: 'bases#new'
+  post 'bases/create', to: 'bases#create'
+  get 'bases/index', to: 'bases#index'
+  get 'bases/:id', to: 'bases#show', as: :base
+  get 'bases/:id/edit', to: 'bases#edit', as: :edit_base
+  post 'bases/:id/update', to: 'bases#update', as: :update_base
+  post 'bases/:id/destroy', to: 'bases#destroy', as: :destroy_base
+  
 end

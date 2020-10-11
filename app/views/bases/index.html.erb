@@ -1,0 +1,62 @@
+<% provide(:tittle, "拠点一覧")%>
+<h1>拠点一覧</h1>
+<div>
+  <table class="table table-bordered table-condensed table-hover">
+    <thead>
+      <tr>
+        <th class="col-md-3"></th>
+        <th class="col-md-2"></th>
+        <th>拠点番号</th>
+        <th>拠点名</th>
+        <th>勤怠種類</th>
+      </tr>  
+    </thead>
+   
+    <tbody>
+      <% @bases.each do |base| %>
+      <tr>
+        <td class="col-md-3">
+          <div class="add_base">
+            <div id="accordion<%= base.id %>">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion<%= base.id %>" href="#collapse<%= base.id %>">
+                <button class="btn btn-primary btn-lg" type="button">修正</button></a>
+              </h4>
+            </div>
+          </div>
+        </td>
+        <td>
+          <%= link_to "削除",destroy_base_path(base.id), method: :post,
+              data: { confirm: "#{base.base_name}を削除してよろしいですか？" },class: "btn btn-primary" %>
+        </td>
+        <td><%= base.base_number %></td>
+        <td><%= base.base_name %></td>
+        <td><%= base.base_type %></td>
+      </tr>
+      <tr>
+        <td colspan="4">
+          <div id="collapse<%= base.id %>" class="panel-collapse collapse">
+            <div class="panel-body"><%= render 'bases/edit_base', {base: base} %></div>
+          </div>
+        </td>
+      </tr>  
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="add_base">
+  <div class="panel-group" id="accordion">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse">
+            <button class="btn btn-primary btn-lg" type="button">拠点情報追加</button></a>
+          </h4>
+        </div>
+      <div id="collapse" class="panel-collapse collapse">
+        <div class="panel-body"><%= render 'bases/new_base' %></div>
+      </div>
+    </div>
+  </div>
+</div>
