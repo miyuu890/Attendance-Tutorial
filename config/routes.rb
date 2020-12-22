@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   
-  root 'bases#index'
+  #root 'bases#index'
   
   
   
@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   end
   
   
-  root 'home#top'
+  #root 'home#top'
  
   get 'bases/new', to: 'bases#new'
   post 'bases/create', to: 'bases#create'

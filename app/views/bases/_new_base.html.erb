@@ -1,4 +1,6 @@
 <%= form_with(model: @base, url:bases_create_path,local: true) do |f| %>
+<%= render 'shared/error_messages_bases', object: @base %>
+
   <%=f.label :base_number, "拠点番号", class: "label--edit" %>
   <%= f.number_field :base_number, class: "form-control" %>
   
